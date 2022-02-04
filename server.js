@@ -39,11 +39,13 @@ app.get('/user/:id', async(req, res)=>{
         axios.get('https://jsonplaceholder.typicode.com/users', { params: { id: userId } })
         .then(function (response) {
             let user = response.data[0];
+
             delete user.username
             delete user.address
             delete user.website
             delete user.company
-            let todo = allTodo.filter(todoitem => todoitem.userId == user.id)
+            
+            const todo = allTodo.filter(todoitem => todoitem.userId == user.id)
             user.todos = todo
             res.send(user)
         })
